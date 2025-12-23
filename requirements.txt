@@ -1,0 +1,8 @@
+Django>=4.2
+djangorestframework
+python-dotenv
+google-api-python-client
+google-auth-oauthlib
+google-auth
+requests
+django-cors-headers
