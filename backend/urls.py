@@ -23,6 +23,7 @@ from app.views import contact_api,career_apply
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/contact/', contact_api),
-    path('api/careers/', career_apply),
+    path('api/careers/', career_apply,name="careers"),
 
 ]
+
