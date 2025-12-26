@@ -3,4 +3,6 @@ djangorestframework
 django-cors-headers
 mysqlclient
 django-storages 
+
 boto3
+gunicorn
