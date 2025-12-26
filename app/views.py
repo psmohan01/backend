@@ -5,7 +5,8 @@ from .serializers import ContactSerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .models import CareerApplication
-
+from rest_framework import status
+from .serializers import CareerApplicationSerializer
 
 
 @api_view(['POST'])
@@ -18,13 +19,17 @@ def contact_api(request):
 
 @api_view(['POST'])
 def career_apply(request):
-    CareerApplication.objects.create(
-        name=request.POST.get('name'),
-        email=request.POST.get('email'),
-        position=request.POST.get('position'),
-        message=request.POST.get('message'),
-        resume=request.FILES.get('resume')
+    serializer = CareerApplicationSerializer(data=request.data)
+
+    if serializer.is_valid():
+        serializer.save()
+        return Response(
+            {"message": "Application submitted successfully"},
+            status=status.HTTP_200_OK
+        )
+
+    return Response(
+        serializer.errors,
+        status=status.HTTP_400_BAD_REQUEST
     )
-    return Response({
-        "message": "Application submitted successfully"
-    })
+
